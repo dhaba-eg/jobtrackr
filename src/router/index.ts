@@ -2,10 +2,12 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import JobsView from "@/views/JobsView.vue";
 import AddJobView from "@/views/AddJobView.vue";
+import SettingsView from "@/views/SettingsView.vue";
 const routes = [
   { path: "/", redirect: "/jobs" },
   { path: "/jobs", component: JobsView },
   { path: "/add", component: AddJobView },
+  { path: "/settings", component: SettingsView },
 ];
 
 const router = createRouter({

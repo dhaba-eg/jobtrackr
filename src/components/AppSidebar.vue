@@ -24,6 +24,14 @@ import SidebarHeader from "./ui/sidebar/SidebarHeader.vue";
 import AvatarImage from "./ui/avatar/AvatarImage.vue";
 import AvatarFallback from "./ui/avatar/AvatarFallback.vue";
 import { Badge } from "@/components/ui/badge";
+import { useJobStore } from "@/stores/useJobStore";
+import { onMounted, computed } from "vue";
+
+const jobStore = useJobStore();
+
+onMounted(() => {
+  jobStore.fetchJobs();
+});
 
 // Menu items.
 const items = [
@@ -39,12 +47,24 @@ const items = [
   },
 ];
 
-const categories = [
-  { title: "Active Applications", count: 12 },
-  { title: "Interviews", count: 5 },
-  { title: "Offers", count: 2 },
-  { title: "Rejected", count: 8 },
-];
+const categories = computed(() => [
+  {
+    title: "Active",
+    count: jobStore.jobCounts.applied,
+  },
+  {
+    title: "Interviews",
+    count: jobStore.jobCounts.interview,
+  },
+  {
+    title: "Offers",
+    count: jobStore.jobCounts.offer,
+  },
+  {
+    title: "Rejected",
+    count: jobStore.jobCounts.rejected,
+  },
+]);
 
 const analytics = [
   { title: "Statistics", icon: BarChart3 },
@@ -126,7 +146,7 @@ const analytics = [
             </Avatar>
             <div>
               <div class="text-sm font-medium">Dhanush P</div>
-              <div class="text-xs text-muted-foreground">dhaba@eg.dk.com</div>
+              <div class="text-xs text-muted-foreground">dhaba@eg.dk</div>
             </div>
           </div>
         </SidebarFooter>
