@@ -1,0 +1,60 @@
+{
+  "jobs": [
+    {
+      "id": "1",
+      "company": "Google",
+      "position": "Frontend Developer",
+      "status": "Applied",
+      "dateApplied": "2024-01-15",
+      "salary": 120000,
+      "location": "Mountain View, CA",
+      "description": "Looking for a skilled frontend developer to join our team and work on cutting-edge web applications.",
+      "notes": "Applied through company website. HR mentioned they'll get back in 2 weeks.",
+      "contactPerson": "John Smith",
+      "contactEmail": "john.smith@google.com",
+      "applicationUrl": "https://careers.google.com/jobs/123"
+    },
+    {
+      "id": "2",
+      "company": "Microsoft",
+      "position": "Vue.js Developer",
+      "status": "Interview",
+      "dateApplied": "2024-01-10",
+      "salary": 115000,
+      "location": "Seattle, WA",
+      "description": "We're seeking a Vue.js developer to work on our enterprise applications.",
+      "notes": "Phone screening went well. Technical interview scheduled for next week.",
+      "contactPerson": "Sarah Johnson",
+      "contactEmail": "sarah.j@microsoft.com",
+      "applicationUrl": "https://careers.microsoft.com/us/en/job/456"
+    },
+    {
+      "id": "3",
+      "company": "Meta",
+      "position": "Full Stack Developer",
+      "status": "Offer",
+      "dateApplied": "2023-12-20",
+      "salary": 140000,
+      "location": "Menlo Park, CA",
+      "description": "Full stack role working on React and Node.js applications.",
+      "notes": "Offer received! Salary negotiation in progress.",
+      "contactPerson": "Mike Chen",
+      "contactEmail": "m.chen@meta.com",
+      "applicationUrl": "https://www.metacareers.com/jobs/789"
+    },
+    {
+      "id": "4",
+      "company": "Netflix",
+      "position": "Senior Frontend Engineer",
+      "status": "Rejected",
+      "dateApplied": "2023-12-05",
+      "salary": 130000,
+      "location": "Los Gatos, CA",
+      "description": "Senior frontend position focusing on user experience and performance.",
+      "notes": "Made it to final round but didn't get selected. Good feedback received.",
+      "contactPerson": "Lisa Wong",
+      "contactEmail": "l.wong@netflix.com",
+      "applicationUrl": "https://jobs.netflix.com/jobs/987"
+    }
+  ]
+}
