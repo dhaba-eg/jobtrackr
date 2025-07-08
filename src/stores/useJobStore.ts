@@ -1,26 +1,114 @@
 import { jobsAPI } from "@/api/jobService";
 import type { JobApplication } from "@/api/jobService";
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
+import { ref, computed, readonly } from "vue";
+
+// Sorting utility function
+const sortJobs = (jobs: JobApplication[], sortBy: string): JobApplication[] => {
+  const sorted = [...jobs]; // Don't mutate original array
+
+  switch (sortBy) {
+    case "newest":
+      return sorted.sort(
+        (a, b) =>
+          new Date(b.dateApplied).getTime() - new Date(a.dateApplied).getTime()
+      );
+
+    case "oldest":
+      return sorted.sort(
+        (a, b) =>
+          new Date(a.dateApplied).getTime() - new Date(b.dateApplied).getTime()
+      );
+
+    case "company-asc":
+      return sorted.sort((a, b) => a.company.localeCompare(b.company));
+
+    case "company-desc":
+      return sorted.sort((a, b) => b.company.localeCompare(a.company));
+
+    case "salary-high":
+      return sorted.sort((a, b) => {
+        const salaryA = a.salary ?? 0;
+        const salaryB = b.salary ?? 0;
+        return salaryB - salaryA;
+      });
+
+    case "salary-low":
+      return sorted.sort((a, b) => {
+        const salaryA = a.salary ?? Number.MAX_VALUE;
+        const salaryB = b.salary ?? Number.MAX_VALUE;
+        return salaryA - salaryB;
+      });
+
+    default:
+      return sorted;
+  }
+};
+
+// Client-side filtering function
+const filterJobs = (
+  jobs: JobApplication[],
+  filters: { status?: string | null; search?: string | null }
+): JobApplication[] => {
+  let filtered = [...jobs];
+
+  // Filter by status
+  if (filters.status) {
+    filtered = filtered.filter((job) => job.status === filters.status);
+  }
+
+  // Filter by search (company or position)
+  if (filters.search) {
+    const searchLower = filters.search.toLowerCase();
+    filtered = filtered.filter(
+      (job) =>
+        job.company.toLowerCase().includes(searchLower) ||
+        job.position.toLowerCase().includes(searchLower)
+    );
+  }
+
+  return filtered;
+};
 
 export const useJobStore = defineStore("jobs", () => {
-  const jobs = ref<JobApplication[]>([]);
+  const allJobs = ref<JobApplication[]>([]); // Store all jobs from server
   const isLoading = ref<boolean>(false);
   const isError = ref<null | string>(null);
 
+  const activeFilters = ref({
+    status: null as string | null,
+    search: null as string | null,
+    sort: "newest" as string,
+  });
+
+  // Step 1: Apply filters to all jobs (client-side)
+  const filteredJobs = computed(() => {
+    return filterJobs(allJobs.value, activeFilters.value);
+  });
+
+  // Step 2: Apply sorting to filtered results
+  const sortedJobs = computed(() => {
+    return sortJobs(filteredJobs.value, activeFilters.value.sort);
+  });
+
+  // Step 3: Calculate counts based on filtered results
   const jobCounts = computed(() => ({
-    applied: jobs.value.filter((job) => job.status === "Applied").length,
-    interview: jobs.value.filter((job) => job.status === "Interview").length,
-    offer: jobs.value.filter((job) => job.status === "Offer").length,
-    rejected: jobs.value.filter((job) => job.status === "Rejected").length,
-    total: jobs.value.length,
+    applied: filteredJobs.value.filter((job) => job.status === "Applied")
+      .length,
+    interview: filteredJobs.value.filter((job) => job.status === "Interview")
+      .length,
+    offer: filteredJobs.value.filter((job) => job.status === "Offer").length,
+    rejected: filteredJobs.value.filter((job) => job.status === "Rejected")
+      .length,
+    total: filteredJobs.value.length,
   }));
 
+  // Fetch all jobs from server (called only once or when data needs refresh)
   const fetchJobs = async () => {
     isLoading.value = true;
     try {
-      const response = await jobsAPI.getJobs();
-      jobs.value = response;
+      const response = await jobsAPI.getJobs(); // Remove filters - get all jobs
+      allJobs.value = response;
     } catch (error) {
       console.error(error);
       isError.value =
@@ -30,14 +118,32 @@ export const useJobStore = defineStore("jobs", () => {
     }
   };
 
+  // Update filters (no API call needed!)
+  const setFilters = (filters: {
+    status?: string | null;
+    search?: string | null;
+    sort?: string | null;
+  }) => {
+    activeFilters.value = {
+      ...activeFilters.value,
+      ...filters,
+      sort: filters.sort || "newest",
+    };
+    // No await needed - this is now synchronous!
+  };
+
   return {
     // State
-    jobs,
+    allJobs,
     isLoading,
     isError,
+    activeFilters: readonly(activeFilters),
     // Getters
     jobCounts,
+    filteredJobs,
+    sortedJobs,
     // Actions
     fetchJobs,
+    setFilters,
   };
 });

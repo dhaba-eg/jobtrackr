@@ -73,7 +73,7 @@ const analytics = [
 </script>
 
 <template>
-  <SidebarProvider class="w-64">
+  <SidebarProvider class="w-fit">
     <Sidebar>
       <SidebarContent class="flex flex-col h-full py-4 px-2">
         <SidebarHeader>
