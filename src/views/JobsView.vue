@@ -54,21 +54,25 @@ const handleFiltersChange = (newFilters: {
   updateURL(newFilters);
 };
 
-onMounted(async () => {
-  // First fetch all jobs
-  await jobStore.fetchJobs();
-
-  // Then apply URL filters
+onMounted(() => {
   const urlFilters = {
     status: (route.query.status as string | null) || null,
     search: (route.query.search as string | null) || null,
     sort: (route.query.sort as string | null) || "newest",
   };
 
-  jobStore.setFilters(urlFilters);
+  const currentFilters = jobStore.activeFilters;
+
+  // Only update if filters have actually changed
+  if (
+    currentFilters.status !== urlFilters.status ||
+    currentFilters.search !== urlFilters.search ||
+    currentFilters.sort !== urlFilters.sort
+  ) {
+    jobStore.setFilters(urlFilters);
+  }
 });
 
-// Fixed route watcher
 watch(
   () => route.query,
   (newQuery) => {

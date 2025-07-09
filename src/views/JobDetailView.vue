@@ -73,7 +73,6 @@ const handleLogoError = (event: Event) => {
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   return date.toLocaleDateString("en-US", {
-    weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -91,29 +90,7 @@ const formatSalary = (salary?: number) => {
 };
 
 const goBack = () => {
-  // Get current filters from the store
-  const currentFilters = jobStore.activeFilters;
-
-  // Build query object from current filters
-  const query: Record<string, string> = {};
-
-  if (currentFilters.status) {
-    query.status = currentFilters.status; // This WILL be in the URL
-  }
-
-  if (currentFilters.search?.trim()) {
-    query.search = currentFilters.search.trim(); // This WILL be in the URL
-  }
-
-  if (currentFilters.sort && currentFilters.sort !== "newest") {
-    query.sort = currentFilters.sort; // This WILL be in the URL
-  }
-
-  // Navigate back with preserved filters IN THE URL
-  router.push({
-    path: "/jobs",
-    query: Object.keys(query).length > 0 ? query : undefined,
-  });
+  router.back();
 };
 
 const editJob = () => {
@@ -129,9 +106,6 @@ const openApplicationUrl = () => {
 onMounted(async () => {
   try {
     const jobId = route.params.id as string;
-    if (jobStore.allJobs.length === 0) {
-      await jobStore.fetchJobs();
-    }
 
     job.value = jobStore.allJobs.find((j) => j.id === jobId) || null;
 

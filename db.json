@@ -1,18 +1,18 @@
 {
   "jobs": [
     {
-      "id": "1",
       "company": "Google",
       "position": "Frontend Developer",
       "status": "Applied",
-      "dateApplied": "2024-01-15",
+      "dateApplied": "2024-05-28",
       "salary": 120000,
       "location": "Mountain View, CA",
       "description": "Join the Google Search team to build fast, responsive, and accessible user interfaces using React, TypeScript, and Web Components. Collaborate with UX researchers and product managers to shape features impacting millions. Strong knowledge of performance optimization, a11y, and scalable component architecture is required.",
       "notes": "Applied through company website. HR mentioned they'll get back in 2 weeks.",
       "contactPerson": "John Smith",
       "contactEmail": "john.smith@google.com",
-      "applicationUrl": "https://careers.google.com/jobs/123"
+      "applicationUrl": "https://careers.google.com/jobs/123",
+      "id": "1"
     },
     {
       "id": "2",
@@ -43,10 +43,9 @@
       "applicationUrl": "https://www.metacareers.com/jobs/789"
     },
     {
-      "id": "4",
       "company": "Netflix",
       "position": "Senior Frontend Engineer",
-      "status": "Rejected",
+      "status": "Offer",
       "dateApplied": "2023-12-05",
       "salary": 130000,
       "location": "Los Gatos, CA",
@@ -54,10 +53,10 @@
       "notes": "Made it to final round but didn't get selected. Good feedback received.",
       "contactPerson": "Lisa Wong",
       "contactEmail": "l.wong@netflix.com",
-      "applicationUrl": "https://jobs.netflix.com/jobs/987"
+      "applicationUrl": "https://jobs.netflix.com/jobs/987",
+      "id": "4"
     },
     {
-      "id": "5",
       "company": "Dropbox",
       "position": "React Native Engineer",
       "status": "Applied",
@@ -68,10 +67,10 @@
       "notes": "Applied via LinkedIn. Waiting for recruiter response.",
       "contactPerson": "Thomas Lee",
       "contactEmail": "tlee@dropbox.com",
-      "applicationUrl": "https://jobs.dropbox.com/openings/react-native"
+      "applicationUrl": "https://jobs.dropbox.com/openings/react-native",
+      "id": "5"
     },
     {
-      "id": "6",
       "company": "Airbnb",
       "position": "Frontend Engineer (Accessibility)",
       "status": "Interview",
@@ -82,7 +81,8 @@
       "notes": "Initial tech screening passed. Final interview next week.",
       "contactPerson": "Amelia Rose",
       "contactEmail": "amelia.r@airbnb.com",
-      "applicationUrl": "https://careers.airbnb.com/roles/frontend-accessibility"
+      "applicationUrl": "https://careers.airbnb.com/roles/frontend-accessibility",
+      "id": "6"
     },
     {
       "id": "7",
@@ -113,7 +113,6 @@
       "applicationUrl": "https://www.spotifyjobs.com/web-engineer-ii"
     },
     {
-      "id": "9",
       "company": "Atlassian",
       "position": "Frontend Engineer (Performance)",
       "status": "Interview",
@@ -124,10 +123,10 @@
       "notes": "Completed take-home assignment. Onsite interview scheduled.",
       "contactPerson": "Olivia Perez",
       "contactEmail": "olivia.p@atlassian.com",
-      "applicationUrl": "https://www.atlassian.com/careers/frontend-performance"
+      "applicationUrl": "https://www.atlassian.com/careers/frontend-performance",
+      "id": "9"
     },
     {
-      "id": "10",
       "company": "GitHub",
       "position": "Developer Experience Engineer",
       "status": "Applied",
@@ -138,7 +137,8 @@
       "notes": "Submitted application via internal referral. Awaiting update.",
       "contactPerson": "Nina Gomez",
       "contactEmail": "nina.gomez@github.com",
-      "applicationUrl": "https://github.com/about/careers/jobs/devx"
+      "applicationUrl": "https://github.com/about/careers/jobs/devx",
+      "id": "10"
     },
     {
       "id": "11",
@@ -169,88 +169,102 @@
       "applicationUrl": "https://jobs.twitch.tv/positions/senior-ui-engineer"
     },
     {
-    "id": "13",
-    "company": "LinkedIn",
-    "position": "Frontend Platform Engineer",
-    "status": "Applied",
-    "dateApplied": "2024-01-29",
-    "salary": 127000,
-    "location": "Sunnyvale, CA",
-    "description": "Join LinkedIn’s frontend platform team to evolve shared libraries, tooling, and frameworks used by 300+ engineers. You'll work with technologies like React, TypeScript, and webpack. Responsibilities include improving DX, managing design tokens, and leading RFC discussions for internal tooling upgrades.",
-    "notes": "Resume tailored to match job description. Submitted via company portal.",
-    "contactPerson": "Priya Nair",
-    "contactEmail": "priya.nair@linkedin.com",
-    "applicationUrl": "https://careers.linkedin.com/jobs/frontend-platform-engineer"
-  },
-  {
-    "id": "14",
-    "company": "Slack",
-    "position": "React Developer",
-    "status": "Interview",
-    "dateApplied": "2024-01-19",
-    "salary": 123000,
-    "location": "Remote",
-    "description": "Develop and maintain Slack's messaging interface using React, Redux, and custom internal frameworks. You'll be expected to work closely with the accessibility and design systems team to ship highly polished, production-ready features with great keyboard and screen reader support.",
-    "notes": "Passed recruiter screen. Awaiting frontend live coding round.",
-    "contactPerson": "Jake Muller",
-    "contactEmail": "jake.muller@slack.com",
-    "applicationUrl": "https://slack.com/careers/openings/react-dev"
-  },
-  {
-    "id": "15",
-    "company": "Notion",
-    "position": "Product Engineer (Frontend)",
-    "status": "Rejected",
-    "dateApplied": "2023-12-30",
-    "salary": 120000,
-    "location": "San Francisco, CA",
-    "description": "Work on rich-text editing, canvas interactions, and collaborative UI features using React and ProseMirror. Collaborate with designers in a fast-paced environment focused on simplicity, performance, and UX polish. Bonus if you’ve worked on low-latency real-time apps or internal tools.",
-    "notes": "Rejected after virtual onsite. Overall positive experience.",
-    "contactPerson": "Helen Zhou",
-    "contactEmail": "helen.zhou@makenotion.com",
-    "applicationUrl": "https://www.notion.so/careers/product-engineer-frontend"
-  },
-  {
-    "id": "16",
-    "company": "Figma",
-    "position": "Frontend Infrastructure Engineer",
-    "status": "Applied",
-    "dateApplied": "2024-01-31",
-    "salary": 130000,
-    "location": "Remote",
-    "description": "Support product engineers by building tooling, CI integrations, and performance instrumentation across Figma's frontend stack. This includes improving bundling strategies, browser test infrastructure, and telemetry pipelines using TypeScript, esbuild, and Playwright.",
-    "notes": "Application submitted via employee referral. No response yet.",
-    "contactPerson": "Aaron Blake",
-    "contactEmail": "aaron.blake@figma.com",
-    "applicationUrl": "https://www.figma.com/careers/frontend-infra"
-  },
-  {
-    "id": "17",
-    "company": "Zoom",
-    "position": "Senior Frontend Developer",
-    "status": "Offer",
-    "dateApplied": "2024-01-02",
-    "salary": 136000,
-    "location": "San Jose, CA",
-    "description": "Work on Zoom’s web conferencing platform, focusing on latency improvements, responsive UI, and modular architecture. Leverage WebRTC, React, and Canvas APIs to build real-time interaction layers. Strong debugging and cross-browser support skills required.",
-    "notes": "Final offer includes signing bonus. Awaiting HR paperwork.",
-    "contactPerson": "Maya Kapoor",
-    "contactEmail": "maya.kapoor@zoom.us",
-    "applicationUrl": "https://zoom.us/careers/frontend-developer"
-  },
-  {
-    "id": "18",
-    "company": "Asana",
-    "position": "Web Engineer",
-    "status": "Interview",
-    "dateApplied": "2024-01-20",
-    "salary": 124000,
-    "location": "New York, NY",
-    "description": "Contribute to Asana’s task management and timeline views using React and Relay. You’ll build reusable components, work on GraphQL-powered data models, and ensure accessibility standards across feature releases. Strong collaboration and unit testing experience expected.",
-    "notes": "Portfolio reviewed positively. Panel interview scheduled.",
-    "contactPerson": "Kevin Liu",
-    "contactEmail": "kevin.liu@asana.com",
-    "applicationUrl": "https://asana.com/jobs/web-engineer"
-  }
+      "company": "LinkedIn",
+      "position": "Frontend Platform Engineer",
+      "status": "Applied",
+      "dateApplied": "2024-07-09",
+      "salary": 127000,
+      "location": "Sunnyvale, CA",
+      "description": "Join LinkedIn’s frontend platform team to evolve shared libraries, tooling, and frameworks used by 300+ engineers. You'll work with technologies like React, TypeScript, and webpack. Responsibilities include improving DX, managing design tokens, and leading RFC discussions for internal tooling upgrades.",
+      "notes": "Resume tailored to match job description. Submitted via company portal.",
+      "contactPerson": "Priya Nair",
+      "contactEmail": "priya.nair@linkedin.com",
+      "applicationUrl": "https://careers.linkedin.com/jobs/frontend-platform-engineer",
+      "id": "13"
+    },
+    {
+      "company": "Slack",
+      "position": "React Developer",
+      "status": "Interview",
+      "dateApplied": "2024-01-19",
+      "salary": 123000,
+      "location": "Remote",
+      "description": "Develop and maintain Slack's messaging interface using React, Redux, and custom internal frameworks. You'll be expected to work closely with the accessibility and design systems team to ship highly polished, production-ready features with great keyboard and screen reader support.",
+      "notes": "Passed recruiter screen. Awaiting frontend live coding round.",
+      "contactPerson": "Jake Muller",
+      "contactEmail": "jake.muller@slack.com",
+      "applicationUrl": "https://slack.com/careers/openings/react-dev",
+      "id": "14"
+    },
+    {
+      "company": "Notion",
+      "position": "Product Engineer (Frontend)",
+      "status": "Rejected",
+      "dateApplied": "2023-09-01",
+      "salary": 120000,
+      "location": "San Francisco, CA",
+      "description": "Work on rich-text editing, canvas interactions, and collaborative UI features using React and ProseMirror. Collaborate with designers in a fast-paced environment focused on simplicity, performance, and UX polish. Bonus if you’ve worked on low-latency real-time apps or internal tools.",
+      "notes": "Rejected after virtual onsite. Overall positive experience.",
+      "contactPerson": "Helen Zhou",
+      "contactEmail": "helen.zhou@makenotion.com",
+      "applicationUrl": "https://www.notion.so/careers/product-engineer-frontend",
+      "id": "15"
+    },
+    {
+      "company": "Figma",
+      "position": "Frontend Infrastructure Engineer",
+      "status": "Applied",
+      "dateApplied": "2024-01-25",
+      "salary": 130000,
+      "location": "Remote",
+      "description": "Support product engineers by building tooling, CI integrations, and performance instrumentation across Figma's frontend stack. This includes improving bundling strategies, browser test infrastructure, and telemetry pipelines using TypeScript, esbuild, and Playwright.",
+      "notes": "Application submitted via employee referral. No response yet.",
+      "contactPerson": "Aaron Blake",
+      "contactEmail": "aaron.blake@figma.com",
+      "applicationUrl": "https://www.figma.com/careers/frontend-infra",
+      "id": "16"
+    },
+    {
+      "id": "17",
+      "company": "Zoom",
+      "position": "Senior Frontend Developer",
+      "status": "Offer",
+      "dateApplied": "2024-01-02",
+      "salary": 136000,
+      "location": "San Jose, CA",
+      "description": "Work on Zoom’s web conferencing platform, focusing on latency improvements, responsive UI, and modular architecture. Leverage WebRTC, React, and Canvas APIs to build real-time interaction layers. Strong debugging and cross-browser support skills required.",
+      "notes": "Final offer includes signing bonus. Awaiting HR paperwork.",
+      "contactPerson": "Maya Kapoor",
+      "contactEmail": "maya.kapoor@zoom.us",
+      "applicationUrl": "https://zoom.us/careers/frontend-developer"
+    },
+    {
+      "company": "Asana",
+      "position": "Web Engineer",
+      "status": "Interview",
+      "dateApplied": "2024-01-20",
+      "salary": 124000,
+      "location": "New York, NY",
+      "description": "Contribute to Asana’s task management and timeline views using React and Relay. You’ll build reusable components, work on GraphQL-powered data models, and ensure accessibility standards across feature releases. Strong collaboration and unit testing experience expected.",
+      "notes": "Portfolio reviewed positively. Panel interview scheduled.",
+      "contactPerson": "Kevin Liu",
+      "contactEmail": "kevin.liu@asana.com",
+      "applicationUrl": "https://asana.com/jobs/web-engineer",
+      "id": "18"
+    },
+    {
+      "company": "Flipkart",
+      "position": "Senior Frontend Developer",
+      "status": "Applied",
+      "dateApplied": "2025-07-09",
+      "salary": 240000,
+      "location": "Remote",
+      "description": "",
+      "notes": "",
+      "contactPerson": "Allen Roy",
+      "contactEmail": "",
+      "applicationUrl": "",
+      "id": "3725"
+    }
   ]
 }

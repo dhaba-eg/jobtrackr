@@ -7,7 +7,7 @@ export interface JobApplication {
   status: "Applied" | "Interview" | "Offer" | "Rejected";
   dateApplied: string;
   salary?: number;
-  location?: string;
+  location: string;
   description?: string;
   notes?: string;
   contactPerson?: string;

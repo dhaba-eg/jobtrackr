@@ -25,13 +25,9 @@ import AvatarImage from "./ui/avatar/AvatarImage.vue";
 import AvatarFallback from "./ui/avatar/AvatarFallback.vue";
 import { Badge } from "@/components/ui/badge";
 import { useJobStore } from "@/stores/useJobStore";
-import { onMounted, computed } from "vue";
+import { computed } from "vue";
 
 const jobStore = useJobStore();
-
-onMounted(() => {
-  jobStore.fetchJobs();
-});
 
 // Menu items.
 const items = [

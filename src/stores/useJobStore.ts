@@ -105,9 +105,15 @@ export const useJobStore = defineStore("jobs", () => {
 
   // Fetch all jobs from server (called only once or when data needs refresh)
   const fetchJobs = async () => {
+    // Don't refetch if data already exists
+    if (allJobs.value.length > 0) {
+      console.log("fetchJobs: early return - data exists");
+      return;
+    }
+
     isLoading.value = true;
     try {
-      const response = await jobsAPI.getJobs(); // Remove filters - get all jobs
+      const response = await jobsAPI.getJobs();
       allJobs.value = response;
     } catch (error) {
       console.error(error);
