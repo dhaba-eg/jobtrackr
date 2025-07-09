@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// ... keep all your existing script setup code exactly the same
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useJobStore } from "@/stores/useJobStore";
@@ -19,12 +18,9 @@ import {
   ExternalLink,
   FileText,
   StickyNote,
-  Clock,
-  TrendingUp,
 } from "lucide-vue-next";
 import type { JobApplication } from "@/api/jobService";
 
-// ... keep all your existing script code
 const route = useRoute();
 const router = useRouter();
 const jobStore = useJobStore();
@@ -34,7 +30,6 @@ const isLoading = ref(true);
 const error = ref<string | null>(null);
 const logoError = ref(false);
 
-// ... keep all your existing functions
 const getStatusColor = (status: string) => {
   switch (status) {
     case "Applied":
