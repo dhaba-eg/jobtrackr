@@ -183,16 +183,6 @@ const handleCancel = () => {
   emit("cancel");
 };
 
-// Fallback for cases where parent doesn't handle cancel event
-const handleCancelFallback = () => {
-  try {
-    router.back();
-  } catch (error) {
-    // Fallback for test environment where router might not be available
-    emit("cancel");
-  }
-};
-
 const initializeForm = () => {
   if (props.mode === "edit" && props.job) {
     formData.company = props.job.company;

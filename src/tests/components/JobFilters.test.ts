@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { nextTick } from "vue";
 import JobFilters from "@/components/JobFilters.vue";
-import { mountWithMocks, waitForDebounce, flushPromises } from "../test-utils";
+import { mountWithMocks, flushPromises } from "../test-utils";
 
 // Mock the useDebounce composable
 vi.mock("@/composables/useDebounce", () => ({
-  useDebounce: vi.fn((value, delay) => {
+  useDebounce: vi.fn((value) => {
     // Return a ref that updates immediately for testing
     return value;
   }),
