@@ -3,7 +3,19 @@ import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useJobStore } from "@/stores/useJobStore";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { Trash2 } from "lucide-vue-next";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -29,6 +41,7 @@ const job = ref<JobApplication | null>(null);
 const isLoading = ref(true);
 const error = ref<string | null>(null);
 const logoError = ref(false);
+const showDeleteDialog = ref(false);
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -95,6 +108,17 @@ const goBack = () => {
 
 const editJob = () => {
   router.push(`/edit/${job.value?.id}`);
+};
+
+const deleteJob = async () => {
+  try {
+    await jobStore.deleteJob(job.value!.id);
+    showDeleteDialog.value = false; // Close dialog
+    goBack(); // Navigate back to jobs list
+  } catch (err) {
+    console.error("Failed to delete job:", err);
+    // TODO: Add error notification
+  }
 };
 
 const openApplicationUrl = () => {
@@ -211,6 +235,36 @@ onMounted(async () => {
                       <Edit class="w-4 h-4 mr-2" />
                       Edit
                     </Button>
+                    <AlertDialog v-model:open="showDeleteDialog">
+                      <AlertDialogTrigger as-child>
+                        <Button variant="destructive" size="sm">
+                          <Trash2 class="w-4 h-4 mr-2" />
+                          Delete
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle
+                            >Delete Job Application</AlertDialogTitle
+                          >
+                          <AlertDialogDescription>
+                            Are you sure you want to delete the application for
+                            <strong>{{ job?.position }}</strong> at
+                            <strong>{{ job?.company }}</strong
+                            >? This action cannot be undone.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction
+                            @click="deleteJob"
+                            class="bg-destructive text-destructive-foreground hover:bg-destructive/90 focus:ring-destructive"
+                          >
+                            Delete Job
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                     <Button
                       v-if="job.applicationUrl"
                       @click="openApplicationUrl"

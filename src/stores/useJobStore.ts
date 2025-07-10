@@ -135,7 +135,22 @@ export const useJobStore = defineStore("jobs", () => {
       ...filters,
       sort: filters.sort || "newest",
     };
-    // No await needed - this is now synchronous!
+  };
+
+  // Add this to the actions section
+  const deleteJob = async (jobId: string) => {
+    try {
+      await jobsAPI.deleteJob(jobId);
+
+      // Remove the job from the store
+      const index = allJobs.value.findIndex((job) => job.id === jobId);
+      if (index !== -1) {
+        allJobs.value.splice(index, 1);
+      }
+    } catch (error) {
+      console.error("Failed to delete job:", error);
+      throw error; // Re-throw so components can handle the error
+    }
   };
 
   return {
@@ -148,6 +163,7 @@ export const useJobStore = defineStore("jobs", () => {
     jobCounts,
     filteredJobs,
     sortedJobs,
+    deleteJob,
     // Actions
     fetchJobs,
     setFilters,
