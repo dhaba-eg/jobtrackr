@@ -8,7 +8,11 @@
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "mock-api": "json-server --watch db.json --port 3001",
-    "dev:full": "concurrently \"pnpm mock-api\" \"pnpm dev\""
+    "dev:full": "concurrently \"pnpm mock-api\" \"pnpm dev\"",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@internationalized/date": "^3.8.2",
@@ -32,15 +36,21 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.11",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/user-event": "^14.6.1",
+    "@testing-library/vue": "^8.1.0",
     "@types/node": "^24.0.10",
     "@vitejs/plugin-vue": "^6.0.0",
+    "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
     "concurrently": "^9.2.0",
+    "jsdom": "^26.1.0",
     "json-server": "1.0.0-beta.3",
     "tailwindcss": "^4.1.11",
     "typescript": "~5.8.3",
     "vite": "^7.0.0",
     "vite-plugin-vue-devtools": "^7.7.7",
+    "vitest": "^3.2.4",
     "vue-tsc": "^2.2.10"
   },
   "packageManager": "pnpm@10.12.4+sha512.5ea8b0deed94ed68691c9bad4c955492705c5eeb8a87ef86bc62c74a26b037b08ff9570f108b2e4dbd1dd1a9186fea925e527f141c648e85af45631074680184"
