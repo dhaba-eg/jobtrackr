@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { JobApplication } from "@/api/jobService";
 import { ref, reactive, computed, onMounted } from "vue";
-import { useRouter } from "vue-router";
 import { parseDate, getLocalTimeZone, today } from "@internationalized/date";
 import type { DateValue } from "@internationalized/date";
 import { z } from "zod";
@@ -65,7 +64,6 @@ interface FormData {
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
-const router = useRouter();
 
 const formData = reactive<FormData>({
   company: "",

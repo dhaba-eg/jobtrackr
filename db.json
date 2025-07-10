@@ -72,7 +72,7 @@
     },
     {
       "company": "Airbnb",
-      "position": "Frontend Engineer (Accessibility)",
+      "position": "Frontend Engineer",
       "status": "Interview",
       "dateApplied": "2024-01-18",
       "salary": 125000,
@@ -114,7 +114,7 @@
     },
     {
       "company": "Atlassian",
-      "position": "Frontend Engineer (Performance)",
+      "position": "Frontend Engineer",
       "status": "Interview",
       "dateApplied": "2024-01-12",
       "salary": 122000,
@@ -253,7 +253,7 @@
       "id": "18"
     },
     {
-      "company": "Calendly",
+      "company": "Nvidia",
       "position": "Senior Frontend Engineer",
       "status": "Applied",
       "dateApplied": "2025-07-10",
