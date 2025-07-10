@@ -46,7 +46,7 @@ const debouncedSearch = useDebounce(searchQuery, 400);
 // Watch for changes and emit to parent
 watch(
   debouncedSearch,
-  (newSearch) => {
+  () => {
     emitFilters();
   },
   { flush: "post" }

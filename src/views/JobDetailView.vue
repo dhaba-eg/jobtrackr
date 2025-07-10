@@ -242,25 +242,52 @@ onMounted(async () => {
                           Delete
                         </Button>
                       </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle
-                            >Delete Job Application</AlertDialogTitle
+                      <AlertDialogContent class="max-w-md">
+                        <AlertDialogHeader class="text-center">
+                          <!-- Icon -->
+                          <div
+                            class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-destructive/10 mb-4"
                           >
-                          <AlertDialogDescription>
-                            Are you sure you want to delete the application for
-                            <strong>{{ job?.position }}</strong> at
-                            <strong>{{ job?.company }}</strong
-                            >? This action cannot be undone.
+                            <Trash2 class="h-6 w-6 text-destructive" />
+                          </div>
+
+                          <AlertDialogTitle
+                            class="text-lg font-semibold text-center"
+                          >
+                            Delete Job Application
+                          </AlertDialogTitle>
+
+                          <AlertDialogDescription
+                            class="text-sm text-muted-foreground mt-2"
+                          >
+                            Are you sure you want to delete your application for
+                            <span class="font-semibold text-foreground">{{
+                              job?.position
+                            }}</span>
+                            at
+                            <span class="font-semibold text-foreground">{{
+                              job?.company
+                            }}</span
+                            >? <br /><br />
+                            <span class="text-xs text-muted-foreground/80">
+                              This action cannot be undone and will permanently
+                              remove this job application from your tracker.
+                            </span>
                           </AlertDialogDescription>
                         </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+
+                        <AlertDialogFooter class="gap-2 mt-6">
+                          <AlertDialogCancel
+                            class="flex-1 bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                          >
+                            Keep Job
+                          </AlertDialogCancel>
                           <AlertDialogAction
                             @click="deleteJob"
-                            class="bg-destructive text-destructive-foreground hover:bg-destructive/90 focus:ring-destructive"
+                            class="flex-1 bg-destructive text-destructive-foreground hover:bg-destructive/90 focus:ring-destructive"
                           >
-                            Delete Job
+                            <Trash2 class="w-4 h-4 mr-2" />
+                            Delete Forever
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>

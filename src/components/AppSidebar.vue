@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted, computed } from "vue";
 import {
   Briefcase,
   PlusCircle,
@@ -25,9 +26,16 @@ import AvatarImage from "./ui/avatar/AvatarImage.vue";
 import AvatarFallback from "./ui/avatar/AvatarFallback.vue";
 import { Badge } from "@/components/ui/badge";
 import { useJobStore } from "@/stores/useJobStore";
-import { computed } from "vue";
+import { useTheme } from "@/composables/useTheme";
+import ThemeToggle from "@/components/ui/ThemeToggle.vue";
 
 const jobStore = useJobStore();
+const { initTheme } = useTheme();
+
+// Initialize theme on mount
+onMounted(() => {
+  initTheme();
+});
 
 // Menu items.
 const items = [
@@ -78,6 +86,7 @@ const analytics = [
             <span class="text-xl font-semibold">JobTrackr</span>
           </div>
         </SidebarHeader>
+
         <SidebarGroup class="flex-1">
           <SidebarGroupLabel>Menu</SidebarGroupLabel>
           <SidebarGroupContent class="mb-4">
@@ -107,6 +116,15 @@ const analytics = [
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
+
+          <!-- New Theme Section -->
+          <SidebarGroupLabel>Appearance</SidebarGroupLabel>
+          <SidebarGroupContent class="mb-4">
+            <div class="px-3 py-2">
+              <ThemeToggle />
+            </div>
+          </SidebarGroupContent>
+
           <SidebarGroupLabel>Categories</SidebarGroupLabel>
           <SidebarGroupContent class="mb-4">
             <SidebarMenu>
@@ -124,6 +142,7 @@ const analytics = [
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
         <SidebarFooter>
           <SidebarMenu>
             <SidebarMenuItem>

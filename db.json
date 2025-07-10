@@ -251,20 +251,6 @@
       "contactEmail": "kevin.liu@asana.com",
       "applicationUrl": "https://asana.com/jobs/web-engineer",
       "id": "18"
-    },
-    {
-      "id": "b0dd",
-      "company": "Zerodha",
-      "position": "Senior Frontend Developer",
-      "status": "Applied",
-      "dateApplied": "2025-07-10",
-      "salary": 167000,
-      "location": "Bangalore",
-      "description": "",
-      "notes": "",
-      "contactPerson": "",
-      "contactEmail": "",
-      "applicationUrl": ""
     }
   ]
 }

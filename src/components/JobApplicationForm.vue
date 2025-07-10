@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import type { JobApplication } from "@/api/jobService";
 import { ref, reactive, computed, onMounted } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import { parseDate, getLocalTimeZone, today } from "@internationalized/date";
 import type { DateValue } from "@internationalized/date";
 import { z } from "zod";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   Popover,
   PopoverContent,
@@ -67,7 +66,6 @@ interface FormData {
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 const router = useRouter();
-const route = useRoute();
 
 const formData = reactive<FormData>({
   company: "",
@@ -586,22 +584,11 @@ onMounted(() => {
 
     <!-- Action Buttons -->
     <div class="flex justify-end gap-4 pt-6 pb-8">
-      <Button
-        @click="handleCancel"
-        variant="outline"
-        size="lg"
-        class="h-12 px-8"
-        type="button"
-      >
+      <Button @click="handleCancel" variant="outline" size="lg" type="button">
         <X class="w-4 h-4 mr-2" />
         Cancel
       </Button>
-      <Button
-        type="button"
-        @click.prevent="handleSubmit"
-        size="lg"
-        class="h-12 px-8"
-      >
+      <Button type="button" @click.prevent="handleSubmit" size="lg">
         <component
           :is="props.mode === 'edit' ? Save : Plus"
           class="w-4 h-4 mr-2"

@@ -194,3 +194,15 @@
 button:hover {
   cursor: pointer;
 }
+
+/* Only animate theme-related properties */
+html {
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Target specific elements that need transitions */
+.sidebar,
+.card,
+.button {
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
