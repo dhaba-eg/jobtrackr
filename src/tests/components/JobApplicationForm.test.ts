@@ -1,7 +1,12 @@
-import { describe, it, expect, vi } from "vitest";
-import { mount } from "@vue/test-utils";
-import JobApplication from "@/components/JobApplicationForm.vue";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import JobApplicationForm from "@/components/JobApplicationForm.vue";
 import type { JobApplication as JobApplicationType } from "@/api/jobService";
+import { mountWithMocks, flushPromises } from "../test-utils";
+
+// Mock the useDebounce composable to avoid timing issues
+vi.mock("@/composables/useDebounce", () => ({
+  useDebounce: (value: any) => value, // Return the ref directly without debouncing
+}));
 
 const mockJob: JobApplicationType = {
   id: "1",
@@ -10,79 +15,95 @@ const mockJob: JobApplicationType = {
   status: "Applied",
   dateApplied: "2024-01-15",
   location: "San Francisco",
+  salary: 120000,
+  description: "Great opportunity",
+  notes: "Applied via LinkedIn",
+  contactPerson: "John Doe",
+  contactEmail: "john@techcorp.com",
+  applicationUrl: "https://techcorp.com/careers",
 };
 
-describe("JobApplication Form", () => {
+describe("JobApplicationForm", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("renders form in add mode", () => {
-    const wrapper = mount(JobApplication, {
+    const wrapper = mountWithMocks(JobApplicationForm, {
       props: {
         mode: "add",
       },
     });
 
-    expect(
-      wrapper.find('input[placeholder="Enter company name"]').exists()
-    ).toBe(true);
-    expect(
-      wrapper.find('input[placeholder="Enter position title"]').exists()
-    ).toBe(true);
+    expect(wrapper.find('[data-testid="company-input"]').exists()).toBe(true);
+    expect(wrapper.find('[data-testid="position-input"]').exists()).toBe(true);
+    expect(wrapper.find('[data-testid="location-input"]').exists()).toBe(true);
     expect(wrapper.text()).toContain("Create Job");
   });
 
-  it("renders form in edit mode with job data", () => {
-    const wrapper = mount(JobApplication, {
+  it("renders form in edit mode with job data", async () => {
+    const wrapper = mountWithMocks(JobApplicationForm, {
       props: {
         mode: "edit",
         job: mockJob,
       },
     });
 
-    expect(
-      wrapper.find('input[placeholder="Enter company name"]').element.value
-    ).toBe("Tech Corp");
-    expect(
-      wrapper.find('input[placeholder="Enter position title"]').element.value
-    ).toBe("Frontend Developer");
+    // Wait for component to initialize
+    await flushPromises();
+
+    // Test input values using data-testid
+    const companyInput = wrapper.find('[data-testid="company-input"]')
+      .element as HTMLInputElement;
+    const positionInput = wrapper.find('[data-testid="position-input"]')
+      .element as HTMLInputElement;
+    const locationInput = wrapper.find('[data-testid="location-input"]')
+      .element as HTMLInputElement;
+
+    expect(companyInput.value).toBe("Tech Corp");
+    expect(positionInput.value).toBe("Frontend Developer");
+    expect(locationInput.value).toBe("San Francisco");
     expect(wrapper.text()).toContain("Save Changes");
   });
 
-  it("validates required fields", async () => {
-    const wrapper = mount(JobApplication, {
+  it("validates required fields when submitted", async () => {
+    const wrapper = mountWithMocks(JobApplicationForm, {
       props: {
         mode: "add",
       },
     });
 
-    // Submit without filling required fields
-    await wrapper.find('button[type="button"]').trigger("click");
+    // Try to submit without filling required fields
+    await wrapper.find('[data-testid="submit-button"]').trigger("click");
+    await flushPromises();
 
+    // Check for validation error messages
     expect(wrapper.text()).toContain("Company name is required");
     expect(wrapper.text()).toContain("Position is required");
     expect(wrapper.text()).toContain("Location is required");
   });
 
-  it("emits submit event with form data", async () => {
-    const wrapper = mount(JobApplication, {
+  it("emits submit event with form data when valid", async () => {
+    const wrapper = mountWithMocks(JobApplicationForm, {
       props: {
         mode: "add",
       },
     });
 
-    // Fill form
+    // Fill required fields
     await wrapper
-      .find('input[placeholder="Enter company name"]')
+      .find('[data-testid="company-input"]')
       .setValue("Test Company");
-    await wrapper
-      .find('input[placeholder="Enter position title"]')
-      .setValue("Developer");
-    await wrapper
-      .find('input[placeholder="e.g. San Francisco, CA or Remote"]')
-      .setValue("Remote");
+    await wrapper.find('[data-testid="position-input"]').setValue("Developer");
+    await wrapper.find('[data-testid="location-input"]').setValue("Remote");
 
     // Submit form
-    await wrapper.find('button[type="button"]:last-child').trigger("click");
+    await wrapper.find('[data-testid="submit-button"]').trigger("click");
+    await flushPromises();
 
+    // Check that submit event was emitted
     expect(wrapper.emitted("submit")).toBeTruthy();
+
     const emittedData = wrapper.emitted("submit")![0][0] as JobApplicationType;
     expect(emittedData.company).toBe("Test Company");
     expect(emittedData.position).toBe("Developer");
@@ -90,14 +111,86 @@ describe("JobApplication Form", () => {
   });
 
   it("emits cancel event when cancel button is clicked", async () => {
-    const wrapper = mount(JobApplication, {
+    const wrapper = mountWithMocks(JobApplicationForm, {
       props: {
         mode: "add",
       },
     });
 
-    await wrapper.find('button[variant="outline"]').trigger("click");
+    await wrapper.find('[data-testid="cancel-button"]').trigger("click");
 
     expect(wrapper.emitted("cancel")).toBeTruthy();
+  });
+
+  it("shows correct button text based on mode", () => {
+    // Test add mode
+    const addWrapper = mountWithMocks(JobApplicationForm, {
+      props: {
+        mode: "add",
+      },
+    });
+    expect(addWrapper.find('[data-testid="submit-button"]').text()).toContain(
+      "Create Job"
+    );
+
+    // Test edit mode
+    const editWrapper = mountWithMocks(JobApplicationForm, {
+      props: {
+        mode: "edit",
+        job: mockJob,
+      },
+    });
+    expect(editWrapper.find('[data-testid="submit-button"]').text()).toContain(
+      "Save Changes"
+    );
+  });
+
+  it("populates all form fields in edit mode", async () => {
+    const wrapper = mountWithMocks(JobApplicationForm, {
+      props: {
+        mode: "edit",
+        job: mockJob,
+      },
+    });
+
+    await flushPromises();
+
+    // Test all form inputs
+    const companyInput = wrapper.find('[data-testid="company-input"]')
+      .element as HTMLInputElement;
+    const positionInput = wrapper.find('[data-testid="position-input"]')
+      .element as HTMLInputElement;
+    const locationInput = wrapper.find('[data-testid="location-input"]')
+      .element as HTMLInputElement;
+
+    expect(companyInput.value).toBe(mockJob.company);
+    expect(positionInput.value).toBe(mockJob.position);
+    expect(locationInput.value).toBe(mockJob.location);
+  });
+
+  it("validates email format", async () => {
+    const wrapper = mountWithMocks(JobApplicationForm, {
+      props: {
+        mode: "add",
+      },
+    });
+
+    // Fill required fields first
+    await wrapper
+      .find('[data-testid="company-input"]')
+      .setValue("Test Company");
+    await wrapper.find('[data-testid="position-input"]').setValue("Developer");
+    await wrapper.find('[data-testid="location-input"]').setValue("Remote");
+
+    // Add invalid email
+    const emailInput = wrapper.find("#contactEmail");
+    await emailInput.setValue("invalid-email");
+    await emailInput.trigger("blur");
+
+    // Try to submit
+    await wrapper.find('[data-testid="submit-button"]').trigger("click");
+    await flushPromises();
+
+    expect(wrapper.text()).toContain("Invalid email format");
   });
 });

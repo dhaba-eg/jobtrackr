@@ -251,6 +251,20 @@
       "contactEmail": "kevin.liu@asana.com",
       "applicationUrl": "https://asana.com/jobs/web-engineer",
       "id": "18"
+    },
+    {
+      "company": "Calendly",
+      "position": "Senior Frontend Engineer",
+      "status": "Applied",
+      "dateApplied": "2025-07-10",
+      "salary": 129000,
+      "location": "Atlanta, GA",
+      "description": "Join the team responsible for Calendly’s scheduling and availability interface. You'll work with React, Zustand, and Tailwind CSS to build responsive, real-time UI components. Collaborate with backend teams to optimize API consumption and with design teams to refine user flows. Experience with accessibility, SSR, and browser performance tuning is a plus.",
+      "notes": "Application submitted via Greenhouse. Waiting to hear back from recruiter.",
+      "contactPerson": "Samantha Brooks",
+      "contactEmail": "samantha.brooks@calendly.com",
+      "applicationUrl": "https://calendly.com/careers/jobs/frontend-senior",
+      "id": "94de"
     }
   ]
 }

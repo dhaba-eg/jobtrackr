@@ -178,8 +178,19 @@ const handleSubmit = async () => {
   emit("submit", jobData);
 };
 
+// Updated to emit cancel event for better testing practices
 const handleCancel = () => {
-  router.back();
+  emit("cancel");
+};
+
+// Fallback for cases where parent doesn't handle cancel event
+const handleCancelFallback = () => {
+  try {
+    router.back();
+  } catch (error) {
+    // Fallback for test environment where router might not be available
+    emit("cancel");
+  }
 };
 
 const initializeForm = () => {
@@ -296,6 +307,7 @@ onMounted(() => {
               class="h-11"
               :class="errors.company ? 'border-destructive' : ''"
               @blur="validateField('company')"
+              data-testid="company-input"
             />
             <p v-if="errors.company" class="text-sm text-destructive">
               {{ errors.company }}
@@ -319,6 +331,7 @@ onMounted(() => {
               class="h-11"
               :class="errors.position ? 'border-destructive' : ''"
               @blur="validateField('position')"
+              data-testid="position-input"
             />
             <p v-if="errors.position" class="text-sm text-destructive">
               {{ errors.position }}
@@ -332,7 +345,7 @@ onMounted(() => {
             <label class="text-sm font-semibold text-foreground"
               >Status *</label
             >
-            <Select v-model="formData.status">
+            <Select v-model="formData.status" data-testid="status-select">
               <SelectTrigger
                 class="h-11"
                 :class="errors.status ? 'border-destructive' : ''"
@@ -368,6 +381,7 @@ onMounted(() => {
                     !calendarDate && 'text-muted-foreground',
                     errors.dateApplied ? 'border-destructive' : '',
                   ]"
+                  data-testid="date-picker-button"
                 >
                   <CalendarIcon class="mr-2 h-4 w-4" />
                   {{ formatDateForDisplay(calendarDate) }}
@@ -402,6 +416,7 @@ onMounted(() => {
               class="h-11"
               :class="errors.salary ? 'border-destructive' : ''"
               @blur="validateField('salary')"
+              data-testid="salary-input"
             />
             <p v-if="errors.salary" class="text-sm text-destructive">
               {{ errors.salary }}
@@ -425,6 +440,7 @@ onMounted(() => {
             class="h-11"
             :class="errors.location ? 'border-destructive' : ''"
             @blur="validateField('location')"
+            data-testid="location-input"
           />
           <p v-if="errors.location" class="text-sm text-destructive">
             {{ errors.location }}
@@ -460,6 +476,7 @@ onMounted(() => {
             class="flex min-h-[120px] w-full rounded-md border border-input bg-background px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
             :class="errors.description ? 'border-destructive' : ''"
             @blur="validateField('description')"
+            data-testid="description-textarea"
           />
           <p v-if="errors.description" class="text-sm text-destructive">
             {{ errors.description }}
@@ -483,6 +500,7 @@ onMounted(() => {
             class="h-11"
             :class="errors.applicationUrl ? 'border-destructive' : ''"
             @blur="validateField('applicationUrl')"
+            data-testid="application-url-input"
           />
           <p v-if="errors.applicationUrl" class="text-sm text-destructive">
             {{ errors.applicationUrl }}
@@ -519,6 +537,7 @@ onMounted(() => {
               class="h-11"
               :class="errors.contactPerson ? 'border-destructive' : ''"
               @blur="validateField('contactPerson')"
+              data-testid="contact-person-input"
             />
             <p v-if="errors.contactPerson" class="text-sm text-destructive">
               {{ errors.contactPerson }}
@@ -542,6 +561,7 @@ onMounted(() => {
               class="h-11"
               :class="errors.contactEmail ? 'border-destructive' : ''"
               @blur="validateField('contactEmail')"
+              data-testid="contact-email-input"
             />
             <p v-if="errors.contactEmail" class="text-sm text-destructive">
               {{ errors.contactEmail }}
@@ -574,6 +594,7 @@ onMounted(() => {
             class="flex min-h-[100px] w-full rounded-md border border-input bg-background px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
             :class="errors.notes ? 'border-destructive' : ''"
             @blur="validateField('notes')"
+            data-testid="notes-textarea"
           />
           <p v-if="errors.notes" class="text-sm text-destructive">
             {{ errors.notes }}
@@ -584,11 +605,22 @@ onMounted(() => {
 
     <!-- Action Buttons -->
     <div class="flex justify-end gap-4 pt-6 pb-8">
-      <Button @click="handleCancel" variant="outline" size="lg" type="button">
+      <Button
+        @click="handleCancel"
+        variant="outline"
+        size="lg"
+        type="button"
+        data-testid="cancel-button"
+      >
         <X class="w-4 h-4 mr-2" />
         Cancel
       </Button>
-      <Button type="button" @click.prevent="handleSubmit" size="lg">
+      <Button
+        type="button"
+        @click.prevent="handleSubmit"
+        size="lg"
+        data-testid="submit-button"
+      >
         <component
           :is="props.mode === 'edit' ? Save : Plus"
           class="w-4 h-4 mr-2"

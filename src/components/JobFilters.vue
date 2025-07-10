@@ -94,6 +94,7 @@ const clearFilters = () => {
           placeholder="Search companies or positions..."
           class="pl-10"
           :disabled="loading"
+          data-testid="search-input"
         />
       </div>
     </div>
@@ -103,7 +104,11 @@ const clearFilters = () => {
       <!-- Status Filter -->
       <div class="flex items-center gap-2">
         <Filter class="h-4 w-4 text-muted-foreground" />
-        <Select v-model="selectedStatus" :disabled="loading">
+        <Select
+          v-model="selectedStatus"
+          :disabled="loading"
+          data-testid="status-select"
+        >
           <SelectTrigger class="w-[140px]">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
@@ -120,7 +125,11 @@ const clearFilters = () => {
       <!-- Sort Filter -->
       <div class="flex items-center gap-2">
         <SortAsc class="h-4 w-4 text-muted-foreground" />
-        <Select v-model="selectedSort" :disabled="loading">
+        <Select
+          v-model="selectedSort"
+          :disabled="loading"
+          data-testid="sort-select"
+        >
           <SelectTrigger class="w-[160px]">
             <SelectValue placeholder="Sort by" />
           </SelectTrigger>
@@ -142,6 +151,7 @@ const clearFilters = () => {
         @click="clearFilters"
         :disabled="loading"
         class="shrink-0"
+        data-testid="clear-button"
       >
         <X class="h-4 w-4" />
       </Button>
